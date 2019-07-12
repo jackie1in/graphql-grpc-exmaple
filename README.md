@@ -30,7 +30,7 @@ npm run dev
 npm run production
 ```
 # graphql操作
-````
+```
 mutation {
  addPost(data: { title: "helloooo" }) {
    message
@@ -38,6 +38,7 @@ mutation {
  }
 }
 ```
+
 ```
 query{
   listPosts(page:1,limit:20){
@@ -49,6 +50,6 @@ query{
       title
       body
     }
-	}
+  }
 }
-````
+```
