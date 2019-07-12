@@ -1,24 +1,35 @@
 scalar DateTime
 
 type Post {
+  # id
   _id: ID
+  # 标题
   title: String
+  # 内容
   body: String
+  # 创建时间
   createdAt: DateTime
 }
 
+# 分页返回结果
 type Posts {
+  # 总数
   count: Int
+  # 当前页
   page: Int
+  # 条数
   limit: Int
+  # 结点
   nodes: [Post]
 }
 
+# 添加文章参数
 input addPostInput {
   title: String
   body: String
 }
 
+# 添加文章返回结果
 type addPostOutput {
   message: String
   result: Post

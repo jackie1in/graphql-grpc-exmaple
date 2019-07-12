@@ -43,7 +43,7 @@ npm run production
 # graphql操作
 ```
 mutation {
- addPost(data: { title: "helloooo" }) {
+ addPost(data: { title: "helloooo",body: "这是一个body" }) {
    message
    result { _id title body }
  }
