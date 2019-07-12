@@ -9,6 +9,7 @@
     "build": "gulp build",
     "postbuild": "rm -rf ./node_modules && npm install --production --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all",
     "start": "ts-node src/server.ts",
+    "predev": "npm run prebuild",
     "dev": "npx nodemon",
     "preproduction": "npm run build",
     "production": "node ./build/server.js",
@@ -38,13 +39,15 @@
     "del": "^5.0.0",
     "eslint": "^6.0.1",
     "grpc_tools_node_protoc_ts": "^2.5.4",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-nodemon": "^2.4.2",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^4.0.2",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.2",
+    "lodash.template": ">=4.5.0",
+    "underscore.string": ">=3.3.5",
     "typescript-eslint-parser": "^22.0.0"
   }
 }
