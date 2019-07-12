@@ -1,0 +1,82 @@
+buildscript {
+    ext {
+        grpcVersion = "1.20.0"
+        protocVersion = "3.7.1"
+        lombokVersion = "1.16.20"
+        grpcStarterVersion = "2.4.0.RELEASE"
+        springBootVersion =  "2.1.6.RELEASE"
+        protobufGradlePluginVersion = "0.8.9"
+    }
+    repositories {
+        mavenLocal()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.google.protobuf:protobuf-gradle-plugin:${protobufGradlePluginVersion}"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    compile "net.devh:grpc-spring-boot-starter:${grpcStarterVersion}"
+    compile "org.postgresql:postgresql"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+
+    // 配置protobuf的文件位置
+    protobuf files("./proto/Post.proto")
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompile "junit:junit:4.12"
+    testCompile "io.grpc:grpc-testing:${grpcVersion}"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+}
+
+protobuf {
+    // Configure the protoc executable
+    protoc {
+        artifact = "com.google.protobuf:protoc:${protocVersion}"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {
+                // To generate deprecated interfaces and static bindService method,
+                // turn the enable_deprecated option to true below:
+                // option 'enable_deprecated=false'
+            }
+        }
+    }
+}
+
+
+idea {
+    module {
+        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java")
+        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/grpc")
+        sourceDirs += file("build/resources/main")
+        sourceDirs += file("../proto")
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports { mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion") }
+}

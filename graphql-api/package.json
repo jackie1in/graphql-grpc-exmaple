@@ -1,0 +1,50 @@
+{
+  "name": "graphql-api",
+  "version": "1.0.0",
+  "description": "typescript graphql网关,使用grpc作为后端支撑",
+  "main": "server.ts",
+  "scripts": {
+    "prebuild": "npm install --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all",
+    "bootstrap-production": "",
+    "build": "gulp build",
+    "postbuild": "rm -rf ./node_modules && npm install --production --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all",
+    "start": "ts-node src/server.ts",
+    "dev": "npx nodemon",
+    "preproduction": "npm run build",
+    "production": "node ./build/server.js",
+    "tslint": "gulp tslint"
+  },
+  "repository": "git+https://github.com/silencecorner/graphql-grpc-exmaple.git",
+  "keywords": [
+    "graphql",
+    "grpc"
+  ],
+  "author": "silencecorner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/silencecorner/graphql-grpc-exmaple/issues"
+  },
+  "homepage": "https://github.com/silencecorner/graphql-grpc-exmaple#readme",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.1",
+    "apollo-server": "^2.6.7",
+    "apollo-server-express": "^2.6.7",
+    "graphql": "^14.4.2",
+    "grpc": "^1.20.0",
+    "protos": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.2.2",
+    "del": "^5.0.0",
+    "eslint": "^6.0.1",
+    "grpc_tools_node_protoc_ts": "^2.5.4",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-tslint": "^8.1.4",
+    "gulp-typescript": "^4.0.2",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2",
+    "typescript-eslint-parser": "^22.0.0"
+  }
+}
