@@ -7,6 +7,8 @@ git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
 ```
 ## 运行
 docker-compose up
+## 说明
+docker最低版本为17.06.0才支持stage构建
 # npm配置
 https://segmentfault.com/a/1190000016090267?utm_source=tag-newest
 
