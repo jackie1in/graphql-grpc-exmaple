@@ -10,7 +10,10 @@ git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
 docker-compose up
 ```
 访问地址 http://localhost:4000/graphql
-
+## 删除镜像
+```
+docker-compose down --rmi all
+```
 ## 说明
 docker最低版本为17.06.0才支持stage构建
 # npm配置
@@ -21,17 +24,11 @@ https://medium.com/@svengau_17540/when-graphql-meets-grpc-3e9729d32e05
 
 # proto-loader
 https://github.com/grpc/grpc-node/tree/master/packages/proto-loader
+---
 https://github.com/protobufjs/protobuf.js
 
 # apoll-sever
 https://www.apollographql.com/docs/apollo-server/
-
-
-
-# 删除镜像
-```
-docker-compose down --rmi all
-```
 
 ## grphql-api
 
