@@ -1,4 +1,13 @@
-## npm配置
+# docker/docker-compose启动
+## 版本(docker/docker-compose)
+![版本](./asset/dokcerversion.jpg)
+## 下载
+```
+git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
+```
+## 运行
+docker-compose up
+# npm配置
 https://segmentfault.com/a/1190000016090267?utm_source=tag-newest
 
 # 原demo
@@ -17,8 +26,7 @@ https://www.apollographql.com/docs/apollo-server/
 ```
 docker-compose down --rmi all
 ```
-# github
-git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
+
 ## grphql-api
 
 ### dev
