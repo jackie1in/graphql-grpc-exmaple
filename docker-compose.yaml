@@ -36,8 +36,6 @@ services:
     container_name: post-api-java
     expose:
       - 50051
-    ports:
-      - 50051:50051  
     depends_on:
       - "postgres"
     environment:

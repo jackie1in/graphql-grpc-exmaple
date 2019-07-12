@@ -48,4 +48,5 @@ const options: any = {
 };
 
 // export default () => new proto.PostService(API_URL, credentials, options);
+console.log(`post service address: ${API_URL}`)
 export default () => new proto.PostService(API_URL, grpc.credentials.createInsecure());
