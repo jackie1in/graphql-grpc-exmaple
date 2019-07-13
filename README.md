@@ -7,13 +7,19 @@ git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
 ```
 ## 运行
 ```
-docker-compose up
+docker-compose up -d
 ```
 访问地址 http://localhost:4000/graphql
-## 删除镜像
+## 停止删除镜像
+### 停止
+```
+docker-compose down
+```
+### 停止删除镜像
 ```
 docker-compose down --rmi all
 ```
+
 ## 说明
 docker最低版本为17.06.0才支持stage构建
 # npm配置
@@ -67,7 +73,7 @@ query{
 # proto文件管理
 ## 注意事项
 - proto文件名规范
-> 本身编译时是支持文件名相同，只要的package不同就行，但是会觉得很怪，使用gradel插件编译的时候会出bug
+> 本身编译时是支持文件名相同，只要的package不同就行，但是会觉得很怪，使用gradle插件编译的时候会出bug
 ## 编辑npmrc
 添加下面几项
 ```
