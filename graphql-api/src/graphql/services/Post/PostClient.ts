@@ -26,26 +26,10 @@ let packageDefinition: any = protoLoader.loadSync(files)
 
 const proto: any = grpc.loadPackageDefinition(packageDefinition).sample;
 
-const credentials: any = grpc.credentials.createSsl(
-  fs.readFileSync(__dirname + '/cert/ca.crt'),
-  fs.readFileSync(__dirname + '/cert/client.key'),
-  fs.readFileSync(__dirname + '/cert/client.crt')
-);
-
-const interceptorAuth: any = (options: any, nextCall: any) =>
-  new grpc.InterceptingCall(nextCall(options), {
-    start: function (metadata, listener, next) {
-      metadata.add('x-api-key', 'myapikey');
-      next(metadata, listener);
-    }
-  });
 
 const API_URL = process.env.POST_API_JAVA_URL || 'localhost:8080';
 console.log(API_URL)
-const options: any = {
-  'grpc.ssl_target_name_override': API_URL,
-  interceptors: [interceptorAuth]
-};
+
 
 // export default () => new proto.PostService(API_URL, credentials, options);
 console.log(`post service address: ${API_URL}`)
