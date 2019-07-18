@@ -1,0 +1,13 @@
+#import "./PostFragment.gql"
+mutation addPost($input: addPostInput){
+  addPost(data: $input) {
+   message
+   result { 
+      ...Post 
+   }
+ }
+}
+
+# {
+#   "input": { "title": "helloooo55555","body": "这是一个测试" }
+# }
