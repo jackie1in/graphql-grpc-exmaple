@@ -5,6 +5,8 @@
 ```
 git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
 ```
+## 编译
+docker-compose build
 ## 运行
 ```
 docker-compose up -d
