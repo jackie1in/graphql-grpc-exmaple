@@ -9,7 +9,8 @@ git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
 ```
 docker-compose up -d
 ```
-访问地址 http://localhost:4000/graphql
+api接口访问地址 http://localhost:4000/graphql
+vue web访问地址 http://localhost:8000/
 ## 停止删除镜像
 ### 停止
 ```
@@ -37,15 +38,16 @@ https://github.com/protobufjs/protobuf.js
 https://www.apollographql.com/docs/apollo-server/
 
 ## grphql-api
-
-### dev
+修改为yarn运行，yarn可以静态安装依赖，避免网络请求依赖下载不下来
+### 安装依赖
 ```
-npm run dev
+yarn run install:offline
 ```
-### production
+### 运行dev
 ```
-npm run production
+yarn run dev
 ```
+## [vue-apollo-sample](./vue-apollo-sample)
 # graphql操作
 ```
 mutation {

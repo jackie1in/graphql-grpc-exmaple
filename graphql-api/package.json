@@ -4,16 +4,12 @@
   "description": "typescript graphql网关,使用grpc作为后端支撑",
   "main": "server.ts",
   "scripts": {
-    "prebuild": "npm install --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all",
-    "bootstrap-production": "",
     "build": "gulp build",
-    "postbuild": "rm -rf ./node_modules && npm install --production --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all",
     "start": "ts-node src/server.ts",
-    "predev": "npm run prebuild",
     "dev": "npx nodemon",
-    "preproduction": "npm run build",
     "production": "node ./build/server.js",
-    "tslint": "gulp tslint"
+    "tslint": "gulp tslint",
+    "install:offline": "yarn install --offline --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all"
   },
   "repository": "git+https://github.com/silencecorner/graphql-grpc-exmaple.git",
   "keywords": [

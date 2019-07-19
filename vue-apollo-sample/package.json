@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "install:offline": "yarn install --offline --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all"
   },
   "dependencies": {
     "@smallwei/avue": "^2.0.4",
@@ -32,9 +33,9 @@
     "eslint-plugin-graphql": "^3.0.3",
     "eslint-plugin-vue": "^5.0.0",
     "start-server-and-test": "^1.7.9",
-    "ts-node": "8.3.0",
     "vue-cli-plugin-apollo": "^0.21.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "typescript": "^3.5.2"
   },
   "eslintConfig": {
     "root": true,

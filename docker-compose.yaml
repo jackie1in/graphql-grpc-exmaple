@@ -42,3 +42,15 @@ services:
       - POSTGRES_HOST=postgres
       - TZ=Asia/Shanghai
       - grpc.server.port=50051
+  vue-apollo-sample:
+    build:
+      context: "./vue-apollo-sample"
+    image: "vue-apollo-sample:latest"
+    container_name: vue-apollo-sample
+    expose:
+      - 8000
+    depends_on:
+      - "graphql-api"
+    ports:
+      - 8000:80
+    command: /bin/sh -c "exec nginx -g 'daemon off;'"  
