@@ -12,6 +12,7 @@ docker-compose build
 docker-compose up -d
 ```
 api接口访问地址 http://localhost:4000/graphql
+--- 
 vue web访问地址 http://localhost:8000/
 ## 停止删除镜像
 ### 停止
