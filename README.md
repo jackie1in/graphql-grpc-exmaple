@@ -6,7 +6,9 @@
 git clone https://github.com/silencecorner/graphql-grpc-exmaple.git
 ```
 ## 编译
+```
 docker-compose build
+```
 ## 运行
 ```
 docker-compose up -d
@@ -25,7 +27,32 @@ docker-compose down --rmi all
 ```
 
 ## 说明
+### docker版本
 docker最低版本为17.06.0才支持stage构建
+### lombok idea配置
+![lombok idea配置](./asset/lombokconfig.jpg)
+### pb依赖文件生成
+当clone下来是发现未找到grpc接口、类的定义，不要慌，build一下就可以啦
+！
+#### linux/mac下
+```
+./gradlew build -x test
+```
+#### windows下
+```
+gradlew.bat build -x test
+```
+### 依赖问题
+因为一些原因项目依赖未下载完成，导致一堆红色报错，这是需要去重新拉去依赖可以执行以下命令
+#### linux/mac下
+```
+./gradlew build --refresh-dependencies -x test
+```
+#### windows下
+```
+gradlew.bat build --refresh-dependencies -x test
+```
+
 # npm配置
 https://segmentfault.com/a/1190000016090267?utm_source=tag-newest
 
