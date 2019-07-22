@@ -122,13 +122,13 @@ npm publish --registry http://product.beidougx.com.cn/nexus/content/repositories
 ## java中使用
 ### 正式环境 
 直接通过npm的tgz文件下载，解压编译，可以通过npm的版本管理来做版本控制，当然本身也是有git仓库的
-- [ ] 文件下载task
-- [ ] 解压task
-- [ ] 编译task
+- [x] 文件下载task
+- [x] 解压task
+- [x] 编译task
 ### 开发环境
 - [X] 直接使用原始文件，支持发布到npm仓库
-- [ ] 使用git仓库
-- [ ] 切换版本task
+- [X] 使用git仓库
+- [X] 切换版本task
 ## nodejs中
 ### 正式环境 
 - [x] install发布protos版本

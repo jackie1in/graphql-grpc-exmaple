@@ -16,4 +16,6 @@ build
 dist
 out
 *.iml
+package
+post-api-java/protos-*.tgz
 package-lock.json

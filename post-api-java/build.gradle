@@ -6,6 +6,8 @@ buildscript {
         grpcStarterVersion = "2.4.0.RELEASE"
         springBootVersion =  "2.1.6.RELEASE"
         protobufGradlePluginVersion = "0.8.9"
+        gradleDownloadTaskVersion = "4.0.0"
+        protosVersion = "1.0.1"
     }
     repositories {
         mavenLocal()
@@ -15,6 +17,7 @@ buildscript {
     dependencies {
         classpath "com.google.protobuf:protobuf-gradle-plugin:${protobufGradlePluginVersion}"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("de.undercouch:gradle-download-task:${gradleDownloadTaskVersion}")
     }
 }
 
@@ -23,6 +26,7 @@ apply plugin: 'idea'
 apply plugin: 'com.google.protobuf'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'de.undercouch.download'
 
 dependencies {
     compile "net.devh:grpc-spring-boot-starter:${grpcStarterVersion}"
@@ -30,7 +34,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
 
     // 配置protobuf的文件位置
-    protobuf files("./proto/Post.proto")
+    protobuf files("./package/Post.proto")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
 
@@ -61,13 +65,29 @@ protobuf {
     }
 }
 
+afterEvaluate {
+    extractIncludeProto.dependsOn unTar
+}
+
+
+task downloadFile(type: Download) {
+    src "http://product.beidougx.com.cn/nexus/content/repositories/npm-all/protos/-/protos-${protosVersion}.tgz"
+    dest rootDir
+    overwrite false
+}
+
+task unTar (type: Copy, dependsOn: downloadFile) {
+    //dependsOn allprojects.findResults { it.tasks.findByName('downloadFile') }
+    from tarTree(resources.gzip("protos-${protosVersion}.tgz"))
+    into getRootDir()
+    duplicatesStrategy 'exclude'
+}
 
 idea {
     module {
         sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java")
         sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/grpc")
         sourceDirs += file("build/resources/main")
-        sourceDirs += file("../proto")
     }
 }
 

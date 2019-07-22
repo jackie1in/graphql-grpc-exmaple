@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+// Doc: https://developers.google.com/protocol-buffers/docs/proto3
+
+package sample;
+
+option java_package = "sample";
+option java_outer_classname = "PostProto";
+// option java_multiple_files = true; 这个会将类分开，避免跟model重名可以不分开，如果太大可以考虑分开
+option objc_class_prefix = "SAMPLE";
+import "google/protobuf/timestamp.proto";
+
+message Post {
+  int32 _id = 1;
+  string title = 2;
+  string body = 3;
+  google.protobuf.Timestamp createdAt = 4;
+}
+
+message Posts {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 count = 3;
+  repeated Post nodes = 4;
+}
+
+message addPostRequest {
+  reserved 1; // _id
+  string title = 2;
+  string body = 3;
+}
+
+message listPostRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string _id = 3;
+}
+
+service PostService {
+  rpc addPost (addPostRequest) returns (Post) {}
+  rpc listPosts (listPostRequest) returns (Posts) {}
+}
