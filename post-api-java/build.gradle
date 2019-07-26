@@ -71,18 +71,18 @@ afterEvaluate {
 
 
 task downloadFile(type: Download) {
-    if (!new File("./protos").exists()){
-        new File("./protos").mkdir()
+    if (!new File("./protos-tmp").exists()){
+        new File("./protos-tmp").mkdir()
     }
     src "http://product.beidougx.com.cn/nexus/content/repositories/npm-all/protos/-/protos-${protosVersion}.tgz"
-    dest './protos'
+    dest './protos-tmp'
     overwrite false
 }
 
 task unTar (type: Copy, dependsOn: downloadFile) {
     //dependsOn allprojects.findResults { it.tasks.findByName('downloadFile') }
-    from tarTree(resources.gzip("./protos/protos-${protosVersion}.tgz"))
-    into './protos'
+    from tarTree(resources.gzip("./protos-tmp/protos-${protosVersion}.tgz"))
+    into './protos-tmp'
     duplicatesStrategy 'exclude'
 }
 
