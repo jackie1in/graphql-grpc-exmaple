@@ -13,6 +13,10 @@ docker-compose build
 ```
 docker-compose up -d
 ```
+只postgres用学习调试
+```
+docker-compose up -d postgres
+```
 api接口访问地址 http://localhost:4000/graphql
 --- 
 vue web访问地址 http://localhost:8000/
@@ -134,3 +138,7 @@ npm publish --registry http://product.beidougx.com.cn/nexus/content/repositories
 - [x] install发布protos版本
 ### 开发环境
 - [ ] npm link(maybe)
+
+
+### 问题修复
+- [windows环境下无法在项目根目录下执行copy task](https://discuss.gradle.org/t/error-with-a-copy-task-on-windows/1803/4)

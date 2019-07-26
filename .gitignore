@@ -19,3 +19,5 @@ out
 package
 post-api-java/protos-*.tgz
 package-lock.json
+protos
+stale_outputs_checked

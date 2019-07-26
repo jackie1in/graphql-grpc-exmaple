@@ -34,7 +34,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
 
     // 配置protobuf的文件位置
-    protobuf files("./package/Post.proto")
+    protobuf files("./protos/package/Post.proto")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
 
@@ -71,15 +71,18 @@ afterEvaluate {
 
 
 task downloadFile(type: Download) {
+    if (!new File("./protos").exists()){
+        new File("./protos").mkdir()
+    }
     src "http://product.beidougx.com.cn/nexus/content/repositories/npm-all/protos/-/protos-${protosVersion}.tgz"
-    dest rootDir
+    dest './protos'
     overwrite false
 }
 
 task unTar (type: Copy, dependsOn: downloadFile) {
     //dependsOn allprojects.findResults { it.tasks.findByName('downloadFile') }
-    from tarTree(resources.gzip("protos-${protosVersion}.tgz"))
-    into getRootDir()
+    from tarTree(resources.gzip("./protos/protos-${protosVersion}.tgz"))
+    into './protos'
     duplicatesStrategy 'exclude'
 }
 
