@@ -2,9 +2,9 @@
 module.exports = {
   client: {
     service: {
-      name: 'test-app',
+      name: 'vue-apollo-sample',
       // GraphQL API 的 URL
-      url: 'http://localhost:4000/graphql',
+      url: 'http://localhost:4001/graphql',
     },
     // 通过扩展名选择需要处理的文件
     includes: [
