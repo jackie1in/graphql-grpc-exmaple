@@ -20,7 +20,7 @@ const fsReadDir = (dir: string, suffix: string): string[] => {
   }
   return tempFiles;
 }
-const files = fsReadDir(process.env.PWD + '/node_modules/protos/', '.proto')
+const files = fsReadDir(process.cwd() + '/node_modules/protos/', '.proto')
 console.log(JSON.stringify(files))
 let packageDefinition: any = protoLoader.loadSync(files)
 
