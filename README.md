@@ -1,3 +1,11 @@
+# 运行环境
+基础环境 | 版本
+--- | ---
+node | 10.16.0
+python(node-gpy依赖python,用于编译node项目) | 3.7
+jdk(开发，生产使用jre) | 1.8.0_211
+gradle | 4.8.1
+
 # docker/docker-compose启动
 ## 版本(docker/docker-compose)
 ![版本](./asset/dokcerversion.jpg)
