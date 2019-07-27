@@ -8,7 +8,9 @@ COPY . /home/node/compile/
 
 RUN  yarn run install:offline
 
-RUN yarn run build
+ARG VUE_APP_GRAPHQL_HTTP
+
+RUN VUE_APP_GRAPHQL_HTTP=${VUE_APP_GRAPHQL_HTTP} yarn run build
 
 FROM nginx:1.17.1-alpine
 

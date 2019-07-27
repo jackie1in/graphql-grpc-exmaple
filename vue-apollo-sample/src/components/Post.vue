@@ -24,7 +24,8 @@
         <el-button type="primary" @click="addPost">确 定</el-button>
       </div>
     </el-dialog>
-    <avue-crud :option="option" :data="data" :page="page"></avue-crud>
+    <avue-crud :option="option" :data="data" :page="page" :table-loading="loading" @refresh-change="refreshChange" @current-change="currentChange"
+               @size-change="sizeChange"></avue-crud>
   </div>
 </template>
 
@@ -42,11 +43,17 @@ export default {
       type: "success",
       title: "文章创建成功",
       form: {},
+      loading: true,
+      index: true,
+      addBtn: false,
+      editBtn: false,
+      delBtn: false,
       obj: {},
       page: {
+        pageSizes: [2, 4, 6, 8, 10],
         currentPage: 1,
         total: 0,
-        pageSize: 10
+        pageSize: 2
       },
       data: [],
       option: {
@@ -71,19 +78,21 @@ export default {
       // 响应式参数
       variables () {
         // 在这里使用 vue 响应式属性
-        this.$message.success("分页信息11111:" + JSON.stringify(this.page));
         return {
           page: this.page.currentPage,
           limit: this.page.pageSize
         }
       },
       error(error) {
+        this.loading = false;
         this.$message.error("出错啦" + error);
       },
       result(result) {
-         this.page.total = result.data.listPosts.count;
-         this.data = result.data.listPosts.nodes;
+        this.page.total = result.data.listPosts.count || 0;
+        this.data = result.data.listPosts.nodes || [];
+        this.loading = false;
       },
+      fetchPolicy: 'cache-and-network',
       update({ posts }) {
         return posts;
       }
@@ -93,14 +102,20 @@ export default {
     close() {
       this.showAlert = false;
     },
+    refreshChange(param = {}) {
+      alert('hahah');
+        // 重新拉取一次，可以
+        this.$apollo.queries.posts.refetch();
+    },
+    currentChange(currentPage) {
+        this.page.currentPage = currentPage;
+    },
+    sizeChange(pageSize) {
+      this.page.pageSize = pageSize;
+    },
     addPost() {
-      console.log("-----------" + JSON.stringify(this.form));
-      // 保存用户输入以防止错误
-      // const newTag = this.newTag;
-      // 将其清除以尽早更新用户页面
-      // this.newTag = "";
       // 调用 graphql 变更
-      let param = this.form;
+      const param = this.form;
       this.$apollo
         .mutate({
           // 查询语句
@@ -121,6 +136,8 @@ export default {
             });
             console.log(data);
             // 将变更中的标签添加到最后
+            data.listPosts.count = data.listPosts.count + 1 || 1;
+            data.listPosts.nodes = data.listPosts.nodes || [];
             data.listPosts.nodes.push(addPost.result);
             // 将数据写回缓存
             store.writeQuery({ query: LIST_POST, data });

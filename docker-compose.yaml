@@ -45,6 +45,8 @@ services:
   vue-apollo-sample:
     build:
       context: "./vue-apollo-sample"
+      args: 
+        VUE_APP_GRAPHQL_HTTP: http://localhost:4000/graphql
     image: "vue-apollo-sample:latest"
     container_name: vue-apollo-sample
     expose:
