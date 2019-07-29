@@ -11,7 +11,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 const httpLink = new HttpLink({
-  uri: process.env.VUE_APP_GRAPHQL_HTTP || 'http://localhost:4000/graphql'
+  uri: process.env.VUE_APP_GRAPHQL_HTTP || 'http://localhost:4001/graphql'
 })
 
 const cache = new InMemoryCache()
