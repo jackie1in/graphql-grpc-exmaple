@@ -25,7 +25,7 @@
       </div>
     </el-dialog>
     <avue-crud :option="option" :data="data" :page="page" :table-loading="loading" @refresh-change="refreshChange" @current-change="currentChange"
-               @size-change="sizeChange"></avue-crud>
+               @size-change="sizeChange" @row-save="rowSave"></avue-crud>
   </div>
 </template>
 
@@ -43,21 +43,21 @@ export default {
       type: "success",
       title: "文章创建成功",
       form: {},
-      loading: true,
-      index: true,
-      addBtn: false,
-      editBtn: false,
-      delBtn: false,
       obj: {},
       page: {
-        pageSizes: [2, 4, 6, 8, 10],
         currentPage: 1,
         total: 0,
-        pageSize: 2
+        pageSize: 10
       },
       data: [],
       option: {
+        loading: true,
+        index: true,
+        addBtn: true,
+        editBtn: false,
+        delBtn: false,
         align: "center",
+        menu: false,
         menuAlign: "center",
         column: [
           {
@@ -89,11 +89,11 @@ export default {
       watchLoading(isLoading, countModifier) {
         this.loading = isLoading;
       },
-      result(ApolloQueryResult, key) {
-        this.page.total = ApolloQueryResult.data.listPosts.count || 0;
-        this.data = ApolloQueryResult.data.listPosts.nodes || [];
+      result(result) {
+          console.log(result.data.listPosts)
+         this.page.total = result.data.listPosts.count || 0;
+         this.data = result.data.listPosts.nodes || [];
       },
-      fetchPolicy: 'cache-and-network',
       update({ posts }) {
         return posts;
       }
@@ -103,8 +103,10 @@ export default {
     close() {
       this.showAlert = false;
     },
+    rowSave (row, loading, done) {
+      this.addPost(row, loading, done);
+    },
     refreshChange(param = {}) {
-      alert('hahah');
         // 重新拉取一次，可以
         this.$apollo.queries.posts.refetch();
     },
@@ -114,9 +116,10 @@ export default {
     sizeChange(pageSize) {
       this.page.pageSize = pageSize;
     },
-    addPost() {
+    addPost(row, loading, done) {
+      const param = this.dialogFormVisible ? this.form : row;
+      console.log('参数' + JSON.stringify(param));
       // 调用 graphql 变更
-      const param = this.form;
       this.$apollo
         .mutate({
           // 查询语句
@@ -136,10 +139,10 @@ export default {
               variables: { page: 1, limit: 10 }
             });
             console.log(data);
-            // 将变更中的标签添加到最后
             data.listPosts.count = data.listPosts.count + 1 || 1;
             this.page.total = data.listPosts.count;
             data.listPosts.nodes = data.listPosts.nodes || [];
+            // 将变更中的标签添加到最后
             data.listPosts.nodes.push(addPost.result);
             // 将数据写回缓存
             store.writeQuery({ query: LIST_POST, data });
@@ -161,6 +164,9 @@ export default {
           }
         })
         .then(data => {
+          if (loading) {
+            loading();
+          }
           this.desc = JSON.stringify(data.data.addPost.result);
           this.dialogFormVisible = false;
           this.showAlert = true;
@@ -169,6 +175,9 @@ export default {
           this.form = {};
         })
         .catch(error => {
+          if (done) {
+            done();
+          }
           // 错误
           this.showAlert = true;
           this.dialogFormVisible = false;

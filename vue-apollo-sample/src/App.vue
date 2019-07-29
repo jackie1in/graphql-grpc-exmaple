@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <h1>这是一个表格例子</h1>
     <div>
       <Post/>
     </div>
