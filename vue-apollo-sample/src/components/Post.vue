@@ -84,13 +84,14 @@ export default {
         }
       },
       error(error) {
-        this.loading = false;
         this.$message.error("出错啦" + error);
       },
-      result(result) {
-        this.page.total = result.data.listPosts.count || 0;
-        this.data = result.data.listPosts.nodes || [];
-        this.loading = false;
+      watchLoading(isLoading, countModifier) {
+        this.loading = isLoading;
+      },
+      result(ApolloQueryResult, key) {
+        this.page.total = ApolloQueryResult.data.listPosts.count || 0;
+        this.data = ApolloQueryResult.data.listPosts.nodes || [];
       },
       fetchPolicy: 'cache-and-network',
       update({ posts }) {
@@ -137,6 +138,7 @@ export default {
             console.log(data);
             // 将变更中的标签添加到最后
             data.listPosts.count = data.listPosts.count + 1 || 1;
+            this.page.total = data.listPosts.count;
             data.listPosts.nodes = data.listPosts.nodes || [];
             data.listPosts.nodes.push(addPost.result);
             // 将数据写回缓存
