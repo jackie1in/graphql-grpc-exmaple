@@ -24,8 +24,16 @@
         <el-button type="primary" @click="addPost">确 定</el-button>
       </div>
     </el-dialog>
-    <avue-crud :option="option" :data="data" :page="page" :table-loading="loading" @refresh-change="refreshChange" @current-change="currentChange"
-               @size-change="sizeChange" @row-save="rowSave"></avue-crud>
+    <avue-crud
+      :option="option"
+      :data="data"
+      :page="page"
+      :table-loading="loading"
+      @refresh-change="refreshChange"
+      @current-change="currentChange"
+      @size-change="sizeChange"
+      @row-save="rowSave"
+    ></avue-crud>
   </div>
 </template>
 
@@ -76,23 +84,23 @@ export default {
     posts: {
       query: LIST_POST,
       // 响应式参数
-      variables () {
+      variables() {
         // 在这里使用 vue 响应式属性
         return {
           page: this.page.currentPage,
           limit: this.page.pageSize
-        }
+        };
       },
       error(error) {
         this.$message.error("出错啦" + error);
       },
       watchLoading(isLoading, countModifier) {
-        this.loading = isLoading;
+        this.loading = isLoading && countModifier === 1;
       },
       result(result) {
-          console.log(result.data.listPosts)
-         this.page.total = result.data.listPosts.count || 0;
-         this.data = result.data.listPosts.nodes || [];
+        console.log(result.data.listPosts);
+        this.page.total = result.data.listPosts.count || 0;
+        this.data = result.data.listPosts.nodes || [];
       },
       update({ posts }) {
         return posts;
@@ -103,22 +111,22 @@ export default {
     close() {
       this.showAlert = false;
     },
-    rowSave (row, loading, done) {
+    rowSave(row, loading, done) {
       this.addPost(row, loading, done);
     },
     refreshChange(param = {}) {
-        // 重新拉取一次，可以
-        this.$apollo.queries.posts.refetch();
+      // 重新拉取一次，可以
+      this.$apollo.queries.posts.refetch();
     },
     currentChange(currentPage) {
-        this.page.currentPage = currentPage;
+      this.page.currentPage = currentPage;
     },
     sizeChange(pageSize) {
       this.page.pageSize = pageSize;
     },
     addPost(row, loading, done) {
       const param = this.dialogFormVisible ? this.form : row;
-      console.log('参数' + JSON.stringify(param));
+      console.log("参数" + JSON.stringify(param));
       // 调用 graphql 变更
       this.$apollo
         .mutate({
@@ -158,7 +166,7 @@ export default {
                 __typename: "Post",
                 _id: -1,
                 title: "",
-                body: "",
+                body: ""
               }
             }
           }
