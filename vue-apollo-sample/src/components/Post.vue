@@ -53,9 +53,10 @@ export default {
       form: {},
       obj: {},
       page: {
+        pageSizes: [3, 6, 9],
         currentPage: 1,
         total: 0,
-        pageSize: 10
+        pageSize: 3
       },
       data: [],
       option: {
@@ -99,8 +100,10 @@ export default {
       },
       result(result) {
         console.log(result.data.listPosts);
-        this.page.total = result.data.listPosts.count || 0;
-        this.data = result.data.listPosts.nodes || [];
+        if (result.data.listPosts) {
+          this.page.total = result.data.listPosts.count || 0;
+          this.data = result.data.listPosts.nodes || [];
+        }
       },
       update({ posts }) {
         return posts;
@@ -125,7 +128,7 @@ export default {
       this.page.pageSize = pageSize;
     },
     addPost(row, loading, done) {
-      const param = this.dialogFormVisible ? this.form : row;
+      let param = this.dialogFormVisible ? this.form : row;
       console.log("参数" + JSON.stringify(param));
       // 调用 graphql 变更
       this.$apollo
@@ -144,16 +147,19 @@ export default {
             // 从缓存中读取这个查询的数据
             const data = store.readQuery({
               query: LIST_POST,
-              variables: { page: 1, limit: 10 }
+              variables: { page: this.page.currentPage, limit: this.page.pageSize }
             });
             console.log(data);
             data.listPosts.count = data.listPosts.count + 1 || 1;
             this.page.total = data.listPosts.count;
             data.listPosts.nodes = data.listPosts.nodes || [];
-            // 将变更中的标签添加到最后
-            data.listPosts.nodes.push(addPost.result);
+            // 当前页最后一个删除，添加到第一个元素
+            if (data.listPosts.nodes.length > 0) {
+              data.listPosts.nodes.pop();
+            }
+            data.listPosts.nodes.unshift(addPost.result);
             // 将数据写回缓存
-            store.writeQuery({ query: LIST_POST, data });
+            store.writeQuery({ query: LIST_POST, variables: { page: this.page.currentPage, limit: this.page.pageSize }, data });
           },
           // 乐观 UI
           // 将在请求产生时作为“假”结果，使用户界面能够快速更新
