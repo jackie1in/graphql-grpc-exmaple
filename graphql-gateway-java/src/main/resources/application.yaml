@@ -1,0 +1,19 @@
+server:
+  port: 8888
+graphql:
+  servlet:
+    tracing-enabled: true
+    async-mode-enabled: true
+  tools:
+    schema-location-pattern: '**/*.graphql'
+
+grpc:
+  client:
+    post-grpc-server:
+      address: 'static://127.0.0.1:8080'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+spring:
+  application:
+    name: graphql-gateway
