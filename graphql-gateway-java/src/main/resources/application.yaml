@@ -6,7 +6,10 @@ graphql:
     async-mode-enabled: true
   tools:
     schema-location-pattern: '**/*.graphql'
-
+  playground:
+    settings:
+      editor.theme: light
+      tracing.hideTracingResponse: false
 grpc:
   client:
     post-grpc-server:
@@ -14,6 +17,8 @@ grpc:
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
+    GLOBAL:
+      keep-alive-timeout: 2S
 spring:
   application:
     name: graphql-gateway

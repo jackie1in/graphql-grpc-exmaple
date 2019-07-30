@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @ProtoClass(PostProto.Post.class)
 public class Post {
-    @ProtoField
+    @ProtoField(name = "id")
     private Integer _id;
     @ProtoField
     private String title;
