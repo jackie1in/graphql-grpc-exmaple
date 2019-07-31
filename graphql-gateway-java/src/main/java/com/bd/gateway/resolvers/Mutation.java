@@ -6,16 +6,12 @@ import com.bd.gateway.inputs.AddPostInput;
 import com.bd.gateway.types.AddPostOutput;
 import com.bd.gateway.types.Post;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.google.common.util.concurrent.Futures;
 import lombok.AllArgsConstructor;
 import net.badata.protobuf.converter.Converter;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import sample.PostProto;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 @AllArgsConstructor
 @Component
