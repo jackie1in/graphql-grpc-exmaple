@@ -1,12 +1,11 @@
+#import "./PostFragment.gql"
 query listPosts($page: Int,$limit: Int){
   listPosts(page:$page,limit:$limit){
     count
     page
     limit
     nodes{
-      _id
-      title
-      body
+      ...Post
     }
 	}
 }

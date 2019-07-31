@@ -134,6 +134,9 @@ export default {
     },
     addPost(row, loading, done) {
       let param = this.dialogFormVisible ? this.form : row;
+      if ('createdAt' in param) {
+        delete param['createdAt']
+      }
       console.log("参数" + JSON.stringify(param));
       // 调用 graphql 变更
       this.$apollo
@@ -177,7 +180,8 @@ export default {
                 __typename: "Post",
                 _id: -1,
                 title: "",
-                body: ""
+                body: "",
+                createdAt: null
               }
             }
           }
