@@ -6,7 +6,7 @@ interface Params {
   _id: string;
 }
 
-export default (root:any, params: Params) => {
+export default (root: any, params: Params) => {
   return new Promise((resolve: any, reject: any) => {
     client.listPosts(params, function(err: any, response: any) {
       if (err) {

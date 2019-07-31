@@ -1,5 +1,5 @@
 #import "./PostFragment.gql"
-mutation addPost($input: addPostInput){
+mutation addPost($input: AddPostInput){
   addPost(data: $input) {
    message
    result { 

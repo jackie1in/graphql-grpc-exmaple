@@ -76,6 +76,11 @@ export default {
           {
             label: "内容",
             prop: "body"
+          },
+          {
+            label: "创建时间",
+            prop: "createdAt",
+            display: false
           }
         ]
       }

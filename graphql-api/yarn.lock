@@ -4161,10 +4161,10 @@ protobufjs@^6.8.6:
     "@types/node" "^10.1.0"
     long "^4.0.0"
 
-protos@^1.0.1:
-  version "1.0.1"
-  resolved "http://product.beidougx.com.cn/nexus/content/groups/npm-all/protos/-/protos-1.0.1.tgz#9c27b34095edb4c5940d5490d77ac3895adbd7ef"
-  integrity sha512-aPHHYSQRIJmWi9ZVL1DCN76b8hN8gK1hfd/AmS1trdLxMATPb5ChZQ7AVc1YtIZ4ZUWzVsNzitXXWuHW5AnWBg==
+protos@^1.2.0:
+  version "1.2.0"
+  resolved "http://product.beidougx.com.cn/nexus/content/groups/npm-all/protos/-/protos-1.2.0.tgz#ff91cf8259df326fdd73984f8f1b1a95b0ee04fb"
+  integrity sha512-lALIGGwP/eT7uRlhOanRC013P6o8lkGAO+SpV9YjvHbgwXcVAM1ItAknez8hKbySeFL+vN6EY8mZOwz/L2Mi2w==
 
 proxy-addr@~2.0.5:
   version "2.0.5"

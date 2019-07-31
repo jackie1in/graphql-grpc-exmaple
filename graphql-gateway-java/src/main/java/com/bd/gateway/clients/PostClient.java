@@ -12,11 +12,11 @@ public class PostClient {
     private PostServiceGrpc.PostServiceFutureStub postServiceFutureStub;
 
 
-    public ListenableFuture<PostProto.Post> addPost(sample.PostProto.addPostRequest request){
+    public ListenableFuture<PostProto.Post> addPost(sample.PostProto.AddPostRequest request){
         return postServiceFutureStub.addPost(request);
     }
 
-    public ListenableFuture<PostProto.Posts> listPost(sample.PostProto.listPostRequest request){
+    public ListenableFuture<PostProto.Posts> listPost(sample.PostProto.ListPostRequest request){
         return postServiceFutureStub.listPosts(request);
     }
 

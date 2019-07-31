@@ -6,7 +6,7 @@ import net.badata.protobuf.converter.annotation.ProtoField;
 import sample.PostProto;
 
 @Data
-@ProtoClass(PostProto.addPostRequest.class)
+@ProtoClass(PostProto.AddPostRequest.class)
 public class AddPostInput {
     @ProtoField
     private String title;

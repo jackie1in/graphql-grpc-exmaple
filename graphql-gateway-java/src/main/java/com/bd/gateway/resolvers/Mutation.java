@@ -24,7 +24,7 @@ public class Mutation implements GraphQLMutationResolver {
     private final PostClient postClient;
 
     public CompletableFuture<AddPostOutput> addPost(AddPostInput data){
-        return RpcGraphqlConverter.lazyTransform(postClient.addPost(Converter.create().toProtobuf(PostProto.addPostRequest.class,data)), in -> {
+        return RpcGraphqlConverter.lazyTransform(postClient.addPost(Converter.create().toProtobuf(PostProto.AddPostRequest.class,data)), in -> {
             Post post = Converter.create().toDomain(Post.class, in);
             AddPostOutput output = new AddPostOutput();
             output.setMessage("post created");
