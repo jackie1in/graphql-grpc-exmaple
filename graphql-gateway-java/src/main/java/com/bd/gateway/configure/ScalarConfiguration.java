@@ -1,4 +1,4 @@
-package com.bd.gateway.conigure;
+package com.bd.gateway.configure;
 
 import com.bd.gateway.scalar.CustomScalars;
 import graphql.schema.GraphQLScalarType;

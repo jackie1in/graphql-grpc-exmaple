@@ -1,4 +1,4 @@
-package com.bd.gateway.conigure;
+package com.bd.gateway.configure;
 
 import com.bd.gateway.clients.interceptor.LogGrpcInterceptor;
 import net.devh.boot.grpc.client.interceptor.GlobalClientInterceptorConfigurer;
