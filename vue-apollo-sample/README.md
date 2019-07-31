@@ -22,6 +22,8 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+#### 使用本地调试环境配置文件
+在本地环境运行时，可在`.env.local`中修改变量值`VUE_APP_GRAPHQL_HTTP`
 
 ### [yarn离线安装](https://yarnpkg.com/blog/2016/11/24/offline-mirror/)
 ```

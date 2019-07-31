@@ -44,8 +44,7 @@ docker最低版本为17.06.0才支持stage构建
 ### lombok idea配置
 ![lombok idea配置](./asset/lombokconfig.jpg)
 ### pb依赖文件生成
-当clone下来是发现未找到grpc接口、类的定义，不要慌，build一下就可以啦
-！
+当clone下来是发现未找到grpc接口、类的定义，不要慌，build一下就可以啦！
 #### linux/mac下
 ```
 ./gradlew build -x test
