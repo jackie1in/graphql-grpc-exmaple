@@ -21,7 +21,7 @@ public class Query implements GraphQLQueryResolver {
     private final PostClient postClient;
     //  listPosts(page: Int limit: Int): Posts
     public CompletableFuture<Posts> listPosts(Integer page, Integer limit, DataFetchingEnvironment env){
-        return RpcGraphqlConverter.protobufToGraphql(postClient.listPost(PostProto.listPostRequest.newBuilder().setPage(page).setLimit(limit).build()),Posts.class);
+        return RpcGraphqlConverter.protobufToGraphql(postClient.listPost(PostProto.ListPostRequest.newBuilder().setPage(page).setLimit(limit).build()),Posts.class);
     }
 //    public Posts listPosts(Integer page, Integer limit, DataFetchingEnvironment env){
 //       PostProto.Posts posts =  postClient.listPost(PostProto.listPostRequest.newBuilder().setPage(page).setLimit(limit).build());

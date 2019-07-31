@@ -24,13 +24,13 @@ type Posts {
 }
 
 # 添加文章参数
-input addPostInput {
+input AddPostInput {
   title: String
   body: String
 }
 
 # 添加文章返回结果
-type addPostOutput {
+type AddPostOutput {
   message: String
   result: Post
 }
@@ -40,7 +40,7 @@ type Query {
 }
 
 type Mutation {
-  addPost(data: addPostInput): addPostOutput
+  addPost(data: AddPostInput): AddPostOutput
 }
 
 schema {

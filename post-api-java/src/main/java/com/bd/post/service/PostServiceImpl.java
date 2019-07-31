@@ -25,14 +25,14 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
     private final PostRepository postRepository;
 
     @Override
-    public void addPost(PostProto.addPostRequest request, StreamObserver<PostProto.Post> responseObserver) {
+    public void addPost(PostProto.AddPostRequest request, StreamObserver<PostProto.Post> responseObserver) {
         Post post = postRepository.save(new Post(request.getTitle(), request.getBody()));
         responseObserver.onNext(modelToRpc(post));
         responseObserver.onCompleted();
     }
 
     @Override
-    public void listPosts(PostProto.listPostRequest request, StreamObserver<PostProto.Posts> responseObserver) {
+    public void listPosts(PostProto.ListPostRequest request, StreamObserver<PostProto.Posts> responseObserver) {
         Pageable pageable = PageRequest.of(request.getPage() - 1, request.getLimit());
         Page<Post> page = postRepository.findAll(pageable);
         responseObserver.onNext(PostProto.Posts.newBuilder()

@@ -24,19 +24,18 @@ message Posts {
   repeated Post nodes = 4;
 }
 
-message addPostRequest {
+message AddPostRequest {
   reserved 1; // _id
   string title = 2;
   string body = 3;
 }
 
-message listPostRequest {
+message ListPostRequest {
   int32 page = 1;
   int32 limit = 2;
-  string _id = 3;
 }
 
 service PostService {
-  rpc addPost (addPostRequest) returns (Post) {}
-  rpc listPosts (listPostRequest) returns (Posts) {}
+  rpc addPost (AddPostRequest) returns (Post) {}
+  rpc listPosts (ListPostRequest) returns (Posts) {}
 }

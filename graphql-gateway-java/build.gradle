@@ -13,7 +13,7 @@ buildscript {
         springBootVersion =  "2.1.6.RELEASE"
         protobufGradlePluginVersion = "0.8.9"
         gradleDownloadTaskVersion = "4.0.0"
-        protosVersion = "1.0.1"
+        protosVersion = "1.2.0"
         graphqlStarterVersion = "5.10.0"
         protobufConverterVersion = "1.1.5"
         futuresExtraVersion = "4.2.0"
