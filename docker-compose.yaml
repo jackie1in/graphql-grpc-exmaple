@@ -45,6 +45,7 @@ services:
       - grpc.client.post-grpc-server.address=dns:///post-api-java:50051
       - TZ=Asia/Shanghai
       - server.port=50051
+      - JAVA_OPTS=-Xmx128m
   post-api-java:
     build:
       context: "./post-api-java"
@@ -58,6 +59,7 @@ services:
       - POSTGRES_HOST=postgres
       - TZ=Asia/Shanghai
       - grpc.server.port=50051
+      - JAVA_OPTS=-Xmx128m
   vue-apollo-sample:
     build:
       context: "./vue-apollo-sample"
