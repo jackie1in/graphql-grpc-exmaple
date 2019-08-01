@@ -1,4 +1,6 @@
 import PostClient from '../services/Post/PostClient';
+import Protobuf from 'protobufjs';
+let LongBits = Protobuf.util.LongBits;
 
 const  client = PostClient();
 
@@ -12,8 +14,12 @@ export default (root: any, params: Params) => {
       if (err) {
         return reject(err);
       }
-      response.createdAt = response.createdAt.toDate();
       resolve(response);
     });
+  }).then((data) => {
+    data['nodes'].forEach(element => {
+      element.createdAt = new Date(LongBits.from(element.createdAt).toNumber() * 1000)
+    });
+    return data;
   });
 };
