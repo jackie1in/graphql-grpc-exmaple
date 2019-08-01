@@ -17,6 +17,9 @@ grpc:
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
+    author-grpc-server:
+      address: 'static://127.0.0.1:8080'
+      negotiationType: plaintext
     GLOBAL:
       keep-alive-timeout: 2S
 spring:

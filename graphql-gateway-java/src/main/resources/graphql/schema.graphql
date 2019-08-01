@@ -1,5 +1,19 @@
 scalar DateTime
 
+
+# 作者
+type Author{
+  # unique id
+  id: ID!
+  # 名称
+  name: String
+}
+# 添加作者参数
+input AddAuthorInput{
+  # 名字
+  name: String!
+}
+
 type Post {
   # id
   _id: ID
@@ -41,6 +55,8 @@ type Query {
 
 type Mutation {
   addPost(data: AddPostInput): AddPostOutput
+  # 新增作者
+  addAuthor(input: AddAuthorInput!): Author
 }
 
 schema {

@@ -13,7 +13,7 @@ buildscript {
         springBootVersion =  "2.1.6.RELEASE"
         protobufGradlePluginVersion = "0.8.9"
         gradleDownloadTaskVersion = "4.0.0"
-        protosVersion = "1.2.0"
+        protosVersion = "1.3.1"
         graphqlStarterVersion = "5.10.0"
         protobufConverterVersion = "1.1.5"
         futuresExtraVersion = "4.2.0"
@@ -50,7 +50,7 @@ dependencies {
     compile("com.google.protobuf:protobuf-java-util:${protocVersion}")
 
     // 配置protobuf的文件位置
-    protobuf files("./protos-tmp/package/Post.proto")
+    protobuf files("./protos-tmp/package/Post.proto", "./protos-tmp/package/Author.proto")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
 

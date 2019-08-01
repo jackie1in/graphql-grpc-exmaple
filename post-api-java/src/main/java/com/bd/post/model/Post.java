@@ -25,11 +25,19 @@ public class Post {
 
     private String body;
 
+    private Integer authorId;
+
     @CreatedDate
     private LocalDateTime createdAt;
 
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public Post(String title, String body, Integer authorId) {
+        this.title = title;
+        this.body = body;
+        this.authorId = authorId;
     }
 }
