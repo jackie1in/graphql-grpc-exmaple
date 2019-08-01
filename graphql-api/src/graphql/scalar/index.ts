@@ -1,13 +1,18 @@
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import moment from 'moment-timezone'
+import Protobuf from 'protobufjs';
+let LongBits = Protobuf.util.LongBits;
 
 export const DateTimeScalar = new GraphQLScalarType ({
   name: 'DateTime',
   description: 'The `DateTime` scalar represents a date and time following the ISO 8601 standard',
   serialize(value) {
     // value sent to the client
-    return moment(value).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss.SSS')
+    if (value instanceof Date) {
+      return moment(value).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss.SSS')
+    }
+    return moment.unix(LongBits.from(value.seconds).toNumber()).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss.SSS')
   },
   parseValue(value) {
     // value from the client
