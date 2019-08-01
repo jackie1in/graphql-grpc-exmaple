@@ -33,7 +33,7 @@ public class DateTimeHelper {
     public static String toUsualString(LocalDateTime dateTime) {
         Objects.requireNonNull(dateTime, "dateTime");
 
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(ZonedDateTime.of(dateTime, ZoneOffset.systemDefault()));
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS").format(ZonedDateTime.of(dateTime, ZoneOffset.systemDefault()));
     }
 
     public static String toUsualString(LocalDate date) {

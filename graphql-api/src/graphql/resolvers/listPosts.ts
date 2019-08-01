@@ -12,6 +12,7 @@ export default (root: any, params: Params) => {
       if (err) {
         return reject(err);
       }
+      response.createdAt = response.createdAt.toDate();
       resolve(response);
     });
   });
