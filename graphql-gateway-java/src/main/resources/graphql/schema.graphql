@@ -23,6 +23,8 @@ type Post {
   body: String
   # 创建时间
   createdAt: DateTime
+  # 文章作者
+  author: Author
 }
 
 # 分页返回结果
@@ -39,8 +41,12 @@ type Posts {
 
 # 添加文章参数
 input AddPostInput {
+  # 标题
   title: String
+  # 内容
   body: String
+  # 作者id
+  authorId: ID
 }
 
 # 添加文章返回结果
