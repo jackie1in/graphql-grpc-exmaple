@@ -50,7 +50,7 @@ dependencies {
     compile("com.google.protobuf:protobuf-java-util:${protocVersion}")
 
     // 配置protobuf的文件位置
-    protobuf files("./protos-tmp/package/Post.proto", "./protos-tmp/package/Author.proto")
+    protobuf files("./protos-tmp/package/")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
 
