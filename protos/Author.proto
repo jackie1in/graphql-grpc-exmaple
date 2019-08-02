@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// Doc: https://developers.google.com/protocol-buffers/docs/proto3
+
+package sample.author;
+
+option java_package = "sample.author";
+option java_outer_classname = "AuthorProto";
+// option java_multiple_files = true; 这个会将类分开，避免跟model重名可以不分开，如果太大可以考虑分开
+
+
+message Author{
+    int32 id = 1;
+    string name = 2;
+}
+message AddAuthorRequest{
+    string name = 1;
+}
+
+
+service AuthorService{
+    rpc addAuthor (AddAuthorRequest) returns (Author);
+}
