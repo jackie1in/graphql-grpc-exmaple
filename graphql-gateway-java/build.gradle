@@ -120,6 +120,8 @@ idea {
         sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java")
         sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/grpc")
         sourceDirs += file("build/resources/main")
+        // fix redefine graphql content
+        sourceDirs -= file("build/resources/main/graphql")
     }
 }
 
