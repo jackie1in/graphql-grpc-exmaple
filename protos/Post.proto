@@ -15,6 +15,7 @@ message Post {
   string title = 2;
   string body = 3;
   google.protobuf.Timestamp createdAt = 4;
+  int32 authorId = 5;
 }
 
 message Posts {
@@ -25,9 +26,9 @@ message Posts {
 }
 
 message AddPostRequest {
-  reserved 1; // _id
   string title = 2;
   string body = 3;
+  int32 authorId = 4;
 }
 
 message ListPostRequest {

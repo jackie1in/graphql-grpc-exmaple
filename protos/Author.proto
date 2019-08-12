@@ -17,7 +17,15 @@ message AddAuthorRequest{
     string name = 1;
 }
 
+message GetAuthorRequest{
+    int32 id = 1;
+}
+
 
 service AuthorService{
     rpc addAuthor (AddAuthorRequest) returns (Author);
+
+
+    rpc getAuthor (GetAuthorRequest) returns (Author);
+
 }
