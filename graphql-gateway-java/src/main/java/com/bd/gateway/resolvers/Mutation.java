@@ -27,7 +27,10 @@ public class Mutation implements GraphQLMutationResolver {
     private final AuthorClient authorClient;
 
     public CompletableFuture<AddPostOutput> addPost(AddPostInput data){
-        return RpcGraphqlConverter.lazyTransform(postClient.addPost(Converter.create().toProtobuf(PostProto.AddPostRequest.class,data)), in -> {
+		PostProto.AddPostRequest  request = Converter.create().toProtobuf(PostProto.AddPostRequest.class,data);
+		// auth 拿到我们当前用户 1
+		request = request.toBuilder().setAuthorId(1).build();
+        return RpcGraphqlConverter.lazyTransform(postClient.addPost(request), in -> {
             Post post = Converter.create().toDomain(Post.class, in);
             AddPostOutput output = new AddPostOutput();
             output.setMessage("post created");
@@ -43,14 +46,4 @@ public class Mutation implements GraphQLMutationResolver {
         authorBean.setName(author.getName());
         return authorBean;
     }
-
-//    public AddPostOutput addPost(AddPostInput data){
-//        PostProto.Post in = postClient.addPost(Converter.create().toProtobuf(PostProto.addPostRequest.class,data));
-//        Post post = Converter.create().toDomain(Post.class, in);
-//        AddPostOutput output = new AddPostOutput();
-//        output.setMessage("post created");
-//        output.setResult(post);
-//        return output;
-//    }
-
 }

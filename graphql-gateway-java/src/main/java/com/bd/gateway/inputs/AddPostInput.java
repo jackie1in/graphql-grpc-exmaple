@@ -12,4 +12,5 @@ public class AddPostInput {
     private String title;
     @ProtoField
     private String body;
+
 }

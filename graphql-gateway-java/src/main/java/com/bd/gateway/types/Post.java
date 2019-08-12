@@ -20,4 +20,7 @@ public class Post {
     private String body;
     @ProtoField(converter = LocalDateTimeConverterImpl.class,nullValue = ProtobufNullValueInspectorImpl.class)
     private LocalDateTime createdAt;
+
+	@ProtoField
+    private Integer authorId;
 }

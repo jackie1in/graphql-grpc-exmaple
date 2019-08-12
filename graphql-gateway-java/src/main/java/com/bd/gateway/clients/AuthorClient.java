@@ -24,4 +24,11 @@ public class AuthorClient {
         return authorServiceBlockingStub.addAuthor(AuthorProto.AddAuthorRequest.newBuilder().setName(name).build());
     }
 
+
+	public AuthorProto.Author getAuthor(Integer id){
+    	if (id == null){
+    		return AuthorProto.Author.getDefaultInstance();
+		}
+		return authorServiceBlockingStub.getAuthor(AuthorProto.GetAuthorRequest.newBuilder().setId(id).build());
+	}
 }
