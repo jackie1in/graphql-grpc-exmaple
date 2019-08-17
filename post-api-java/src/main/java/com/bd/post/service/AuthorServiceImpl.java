@@ -34,6 +34,7 @@ public class AuthorServiceImpl extends AuthorServiceGrpc.AuthorServiceImplBase {
 	@Override
 	public void getAuthor(AuthorProto.GetAuthorRequest request, StreamObserver<AuthorProto.Author> responseObserver) {
 		Optional<Author> author = authorRepository.findById(request.getId());
+
 		if (author.isPresent()){
 			responseObserver.onNext(AuthorProto.Author.newBuilder().setId(author.get().getId()).setName(author.get().getName()).build());
 		}else{

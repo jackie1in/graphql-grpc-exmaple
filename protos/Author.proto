@@ -7,6 +7,7 @@ package sample.author;
 option java_package = "sample.author";
 option java_outer_classname = "AuthorProto";
 // option java_multiple_files = true; 这个会将类分开，避免跟model重名可以不分开，如果太大可以考虑分开
+import "validate/validate.proto";
 
 
 message Author{
@@ -14,7 +15,7 @@ message Author{
     string name = 2;
 }
 message AddAuthorRequest{
-    string name = 1;
+    string name = 1 [(validate.rules).string = {min_len: 5, max_len: 10}];
 }
 
 message GetAuthorRequest{

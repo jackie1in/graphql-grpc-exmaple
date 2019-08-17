@@ -150,3 +150,6 @@ npm publish --registry http://product.beidougx.com.cn/nexus/content/repositories
 ### 问题修复
 - [windows环境下无法在项目根目录下执行copy task](https://discuss.gradle.org/t/error-with-a-copy-task-on-windows/1803/4)
 - `process.env.PWD`在windows下不生效，使用`process.cwd()`获取当前项目目录
+
+### 新特性
+[使用protoc-gen-validate做参数校验](https://github.com/envoyproxy/protoc-gen-validate)
