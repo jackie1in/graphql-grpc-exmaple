@@ -9,14 +9,14 @@ type Author{
   name: String
 }
 # 添加作者参数
-input AddAuthorInput{
+input AddAuthorRequest{
   # 名字
   name: String!
 }
 
 type Post {
   # id
-  _id: ID
+  id: ID
   # 标题
   title: String
   # 内容
@@ -36,31 +36,31 @@ type Posts {
   # 条数
   limit: Int
   # 结点
-  nodes: [Post]
+  nodesList: [Post]
 }
 
 # 添加文章参数
-input AddPostInput {
+input AddPostRequest {
   # 标题
   title: String
   # 内容
   body: String
 }
-
-# 添加文章返回结果
-type AddPostOutput {
-  message: String
-  result: Post
+# 分页参数
+input ListPostRequest{
+    # 第几页
+    page: Int!
+    # 获取条数
+    limit: Int!
 }
-
 type Query {
-  listPosts(page: Int limit: Int): Posts
+  listPosts(request: ListPostRequest): Posts
 }
 
 type Mutation {
-  addPost(data: AddPostInput): AddPostOutput
+  addPost(request: AddPostRequest): Post
   # 新增作者
-  addAuthor(input: AddAuthorInput!): Author
+  addAuthor(request: AddAuthorRequest!): Author
 }
 
 schema {

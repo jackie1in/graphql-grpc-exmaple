@@ -16,6 +16,6 @@ public class ExceptionHandlerConfiguration {
 
 	@ExceptionHandler(Throwable.class)
 	GraphQLError handle(Throwable e) {
-		return new ThrowableGraphQLError(e, "Catch all handler");
+		return new ThrowableGraphQLError(e, e.getMessage());
 	}
 }

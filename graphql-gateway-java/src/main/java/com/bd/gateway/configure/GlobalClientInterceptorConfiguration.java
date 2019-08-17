@@ -16,7 +16,9 @@ public class GlobalClientInterceptorConfiguration {
     @Bean
     public GlobalClientInterceptorConfigurer globalInterceptorConfigurerAdapter() {
 		ValidatorIndex index = new ReflectiveValidatorIndex();
-        return registry -> registry.addClientInterceptors(new LogGrpcInterceptor()).addClientInterceptors(new ValidatingClientInterceptor(index));
+        return registry -> registry
+			.addClientInterceptors(new LogGrpcInterceptor())
+			.addClientInterceptors(new ValidatingClientInterceptor(index));
     }
 
 }

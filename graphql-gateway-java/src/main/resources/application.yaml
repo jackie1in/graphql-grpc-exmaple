@@ -6,7 +6,6 @@ graphql:
     async-mode-enabled: true
     exception-handlers-enabled: true
     maxQueryDepth: 5
-    maxQueryComplexity: 5
   tools:
     schema-location-pattern: '**/*.graphql'
   playground:

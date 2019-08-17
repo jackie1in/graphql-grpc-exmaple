@@ -43,10 +43,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     compile("net.devh:grpc-client-spring-boot-starter:${grpcStarterVersion}")
 
-    compile ("com.github.BAData:protobuf-converter:${protobufConverterVersion}"){
-        exclude(group: "com.google.protobuf", module: "protobuf-java")
-    }
-
     compile("com.google.protobuf:protobuf-java-util:${protocVersion}")
 
     // 配置protobuf的文件位置
@@ -65,6 +61,7 @@ dependencies {
     compile "com.spotify:futures-extra:${futuresExtraVersion}"
     compile "io.envoyproxy.protoc-gen-validate:pgv-java-stub:${pgvVersion}"
     compile "io.envoyproxy.protoc-gen-validate:pgv-java-grpc:${pgvVersion}"
+    compile 'com.hubspot.jackson:jackson-datatype-protobuf:0.9.11-jackson2.9'
 
     // testing facilities
     testCompile "com.graphql-java-kickstart:graphql-spring-boot-starter-test:${graphqlStarterVersion}"
