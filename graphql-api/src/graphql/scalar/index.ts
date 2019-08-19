@@ -12,7 +12,7 @@ export const DateTimeScalar = new GraphQLScalarType ({
     if (value instanceof Date) {
       return moment(value).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss.SSS')
     }
-    return moment.unix(LongBits.from(value.seconds).toNumber()).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss.SSS')
+    return moment(LongBits.from(value.seconds).toNumber() * 1000 + value.nanos / 1000).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss.SSS')
   },
   parseValue(value) {
     // value from the client

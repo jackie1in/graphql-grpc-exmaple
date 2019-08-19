@@ -9,7 +9,7 @@
     "dev": "npx nodemon",
     "production": "node ./build/server.js",
     "tslint": "gulp tslint",
-    "install:offline": "yarn install --offline --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all"
+    "install:offline": "yarn install --offline --registry=https://registry.npm.taobao.org"
   },
   "repository": "git+https://github.com/silencecorner/graphql-grpc-exmaple.git",
   "keywords": [
@@ -29,8 +29,8 @@
     "graphql": "^14.4.2",
     "grpc": "^1.20.0",
     "moment-timezone": "^0.5.26",
-    "protobufjs": "6.8.6",
-    "protos": "^1.2.0"
+    "protos": "file:../protos",
+    "schema": "file:../schema"
   },
   "devDependencies": {
     "@types/graphql": "^14.2.2",

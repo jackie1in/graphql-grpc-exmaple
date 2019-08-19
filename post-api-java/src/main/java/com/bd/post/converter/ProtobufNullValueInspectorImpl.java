@@ -1,4 +1,4 @@
-package com.bd.gateway.clients.converter;
+package com.bd.post.converter;
 
 import com.google.protobuf.Duration;
 import com.google.protobuf.Timestamp;

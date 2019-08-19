@@ -4,12 +4,15 @@ graphql:
   servlet:
     tracing-enabled: true
     async-mode-enabled: true
+    exception-handlers-enabled: true
+    contextSetting: PER_REQUEST_WITH_INSTRUMENTATION
+    # maxQueryDepth: 5
   tools:
     schema-location-pattern: '**/*.graphql'
   playground:
     settings:
       editor.theme: light
-      tracing.hideTracingResponse: false
+      tracing.hideTracingResponse: true
 grpc:
   client:
     post-grpc-server:

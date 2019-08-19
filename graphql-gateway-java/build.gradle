@@ -13,11 +13,11 @@ buildscript {
         springBootVersion =  "2.1.6.RELEASE"
         protobufGradlePluginVersion = "0.8.9"
         gradleDownloadTaskVersion = "4.0.0"
-        protosVersion = "1.3.1"
+        protosVersion = "1.3.2"
         graphqlStarterVersion = "5.10.0"
         protobufConverterVersion = "1.1.5"
         futuresExtraVersion = "4.2.0"
-
+        pgvVersion = "0.2.0"
     }
     repositories {
         mavenLocal()
@@ -43,14 +43,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     compile("net.devh:grpc-client-spring-boot-starter:${grpcStarterVersion}")
 
-    compile ("com.github.BAData:protobuf-converter:${protobufConverterVersion}"){
-        exclude(group: "com.google.protobuf", module: "protobuf-java")
-    }
-
     compile("com.google.protobuf:protobuf-java-util:${protocVersion}")
 
     // 配置protobuf的文件位置
-    protobuf files("./protos-tmp/package/Post.proto", "./protos-tmp/package/Author.proto")
+    protobuf files("../protos")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
 
@@ -63,6 +59,9 @@ dependencies {
     runtime "com.graphql-java-kickstart:voyager-spring-boot-starter:${graphqlStarterVersion}"
 
     compile "com.spotify:futures-extra:${futuresExtraVersion}"
+    compile "io.envoyproxy.protoc-gen-validate:pgv-java-stub:${pgvVersion}"
+    compile "io.envoyproxy.protoc-gen-validate:pgv-java-grpc:${pgvVersion}"
+    compile 'com.hubspot.jackson:jackson-datatype-protobuf:0.9.11-jackson2.9'
 
     // testing facilities
     testCompile "com.graphql-java-kickstart:graphql-spring-boot-starter-test:${graphqlStarterVersion}"
@@ -82,44 +81,39 @@ protobuf {
         grpc {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
+        javapgv {
+            artifact = "io.envoyproxy.protoc-gen-validate:protoc-gen-validate:${pgvVersion}"
+        }
     }
+
     generateProtoTasks {
         all()*.plugins {
-            grpc {
-                // To generate deprecated interfaces and static bindService method,
-                // turn the enable_deprecated option to true below:
-                // option 'enable_deprecated=false'
+            javapgv {
+                option "lang=java"
             }
+            grpc {}
         }
     }
 }
 
-afterEvaluate {
-    extractIncludeProto.dependsOn unTar
-}
 
-
-task downloadFile(type: Download) {
-    if (!new File("./protos-tmp").exists()){
-        new File("./protos-tmp").mkdir()
+sourceSets {
+    main {
+        resources {
+            srcDir '../schema' //资源目录
+        }
     }
-    src "http://product.beidougx.com.cn/nexus/content/repositories/npm-all/protos/-/protos-${protosVersion}.tgz"
-    dest './protos-tmp'
-    overwrite false
 }
 
-task unTar (type: Copy, dependsOn: downloadFile) {
-    //dependsOn allprojects.findResults { it.tasks.findByName('downloadFile') }
-    from tarTree(resources.gzip("./protos-tmp/protos-${protosVersion}.tgz"))
-    into './protos-tmp'
-    duplicatesStrategy 'exclude'
-}
 
 idea {
     module {
         sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java")
+        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/javapgv")
         sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/grpc")
         sourceDirs += file("build/resources/main")
+        // fix redefine graphql content
+        sourceDirs -= file("build/resources/main/graphql")
     }
 }
 
@@ -127,6 +121,20 @@ repositories {
     mavenLocal()
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'https://jitpack.io' }
+    maven {
+        credentials {
+            username 'KwPAxj'
+            password 'KKnP3maIK3'
+        }
+        url 'https://repo.rdc.aliyun.com/repository/73792-release-PXkyIy/'
+    }
+    maven {
+        credentials {
+            username 'KwPAxj'
+            password 'KKnP3maIK3'
+        }
+        url 'https://repo.rdc.aliyun.com/repository/73792-snapshot-z4fvGZ/'
+    }
     mavenCentral()
 }
 

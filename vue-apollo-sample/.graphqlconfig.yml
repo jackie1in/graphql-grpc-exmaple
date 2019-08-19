@@ -1,6 +1,6 @@
 projects:
   app:
-    schemaPath: schema.graphql
+    schemaPath: ../schema/schema.graphql
     includes:
       - '**/*.gql'
     extensions:

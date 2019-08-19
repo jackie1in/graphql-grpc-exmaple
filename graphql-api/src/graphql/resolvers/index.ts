@@ -1,15 +1,26 @@
-import addPost from './addPost';
-import listPosts from './listPosts';
+import { addPost, updatePost } from './mutation/post';
+import { listPosts, posts } from './query/post';
+import { author, getAuthor } from './query/author';
+import { addAuthor } from './mutation/author';
 import {DateTimeScalar} from '../scalar'
 
 const resolvers: any  = {
   DateTime: DateTimeScalar,
   Mutation: {
-    addPost
+    addPost,
+    updatePost,
+    addAuthor
   },
   Query: {
+    getAuthor,
     listPosts
   },
+  Author: {
+    posts
+  },
+  Post: {
+    author
+  }
 };
 
 export default resolvers;

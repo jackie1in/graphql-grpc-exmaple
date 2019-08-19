@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "install:offline": "yarn install --offline --registry http://product.beidougx.com.cn/nexus/content/groups/npm-all"
+    "install:offline": "yarn install --offline --registry=https://registry.npm.taobao.org"
   },
   "dependencies": {
     "@smallwei/avue": "^2.0.4",

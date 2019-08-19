@@ -17,7 +17,8 @@ dist
 out
 *.iml
 package
-post-api-java/protos-*.tgz
 package-lock.json
 protos-tmp
 stale_outputs_checked
+protos-*.tgz
+schema*.tgz

@@ -2,7 +2,9 @@ FROM gradle:4.8.1-jdk8 as build
 LABEL maintainer="https://github.com/silencecorner"
 USER root
 WORKDIR /home/gradle/app
-COPY . /home/gradle/app/
+COPY protos /home/gradle/protos/
+COPY schema /home/gradle/schema/
+COPY graphql-gateway-java /home/gradle/app/
 RUN gradle build -x test
 
 FROM openjdk:8u171-jre-alpine3.8

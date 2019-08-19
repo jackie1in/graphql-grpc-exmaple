@@ -1,4 +1,4 @@
-package com.bd.gateway.clients.converter;
+package com.bd.post.converter;
 
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.Timestamps;
@@ -20,7 +20,7 @@ public class LocalDateTimeConverterImpl implements TypeConverter<LocalDateTime, 
     @Override
     public Timestamp toProtobufValue(Object instance) {
         if (instance != null){
-            return Timestamps.fromMillis(((LocalDateTime)instance).toEpochSecond(ZoneOffset.of("+8")));
+            return Timestamps.fromNanos(((LocalDateTime)instance).toInstant(ZoneOffset.of("+8")).toEpochMilli() * 1000000 +((LocalDateTime)instance).getNano() );
         }
         return Timestamp.getDefaultInstance();
     }
