@@ -26,4 +26,8 @@ public class GraphqlToolConfiguration {
 			.useDefaultGenericWrappers(true)
 			.build();
 	}
+	@Bean
+	ExceptionHandlerConfiguration configuration(){
+		return new ExceptionHandlerConfiguration();
+	}
 }

@@ -5,7 +5,8 @@ graphql:
     tracing-enabled: true
     async-mode-enabled: true
     exception-handlers-enabled: true
-    maxQueryDepth: 5
+    contextSetting: PER_REQUEST_WITH_INSTRUMENTATION
+    # maxQueryDepth: 5
   tools:
     schema-location-pattern: '**/*.graphql'
   playground:

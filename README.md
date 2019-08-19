@@ -25,9 +25,16 @@ docker-compose up -d
 ```
 docker-compose up -d postgres
 ```
+# 访问地址
+## nodejs网关
+playground访问地址 http://localhost:4000/graphql
 api接口访问地址 http://localhost:4000/graphql
---- 
-vue web访问地址 http://localhost:8000/
+vue web(1)Java版本网关访问地址 http://localhost:8000/
+
+## java网关
+playground访问地址 http://localhost:8800/playground
+api接口访问地址 http://localhost:8800/graphql
+vue web(2)Java版本网关访问地址 http://localhost:8010/
 ## 停止删除镜像
 ### 停止
 ```
@@ -92,44 +99,84 @@ yarn run dev
 # graphql操作
 ```
 mutation {
- addPost(data: { title: "helloooo",body: "这是一个body" }) {
-   message
-   result { _id title body }
- }
+  addAuthor(
+    request: { name: "海哥" }
+  ) {
+    id
+    name
+  }
 }
 ```
-
 ```
-query{
-  listPosts(page:1,limit:20){
-    count
-    page
-    limit
-    nodes{
-      _id
-      title
-      body
+mutation {
+  addPost(
+    request: { title: "第一个例子", body: "这是个我们网关的第一个例子" }
+  ) {
+    id
+    title
+    body
+    createdAt
+    author{
+      id
+      name
     }
   }
 }
+
+```
+```
+query{
+  getAuthor(request:{id: 1}){
+    id
+    name
+    posts(request:{page: 1,limit: 10}){
+      page
+      count
+      limit
+      nodes{
+        id
+        title
+        body
+        createdAt
+      }
+    }
+  }
+}
+```
+```
+mutation{
+	updatePost(request: {id: 1,body: "44441111"}){
+    id
+    title
+     body
+    createdAt
+  }
+}
+```
+```
+query {
+  posts: listPosts(request: { page: 1, limit: 20 }) {
+    page
+    limit
+    count
+    nodes: nodes {
+      id
+      title
+      body
+      createdAt
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
 ```
 # proto文件管理
 ## 注意事项
 - proto文件名规范
 > 本身编译时是支持文件名相同，只要的package不同就行，但是会觉得很怪，使用gradle插件编译的时候会出bug
-## 编辑npmrc
-添加下面几项
-```
-registry=http://product.beidougx.com.cn/nexus/content/groups/npm-all
-email=hilin2333@gamil.com
-always-auth=false
-_auth=YWRtaW46YWRtaW4xMjM=
-```
-
-## 发布
-```
-npm publish --registry http://product.beidougx.com.cn/nexus/content/repositories/npm.local
-```
 ## java中使用
 ### 正式环境 
 直接通过npm的tgz文件下载，解压编译，可以通过npm的版本管理来做版本控制，当然本身也是有git仓库的

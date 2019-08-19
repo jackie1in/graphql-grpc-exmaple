@@ -18,8 +18,13 @@ public class Mutation implements GraphQLMutationResolver {
     private final AuthorClient authorClient;
 
     public ListenableFuture<PostProto.Post> addPost(PostProto.AddPostRequest request){
-		return postClient.addPost(request);
+		return postClient.addPost(request.toBuilder().setAuthorId(1).build());
     }
+
+
+	public ListenableFuture<PostProto.Post> updatePost(PostProto.UpdatePostRequest request){
+		return postClient.updatePost(request);
+	}
 
     public ListenableFuture<AuthorProto.Author> addAuthor(AuthorProto.AddAuthorRequest request){
     	  return authorClient.addAuthor(request);

@@ -9,9 +9,10 @@ option java_outer_classname = "PostProto";
 // option java_multiple_files = true; 这个会将类分开，避免跟model重名可以不分开，如果太大可以考虑分开
 option objc_class_prefix = "SAMPLE";
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
 
 message Post {
-  int32 _id = 1;
+  int32 id = 1;
   string title = 2;
   string body = 3;
   google.protobuf.Timestamp createdAt = 4;
@@ -26,17 +27,25 @@ message Posts {
 }
 
 message AddPostRequest {
+  string title = 2 [(validate.rules).string = {min_len: 1, max_len: 100}];
+  string body = 3 [(validate.rules).string = {min_len: 100, max_len: 20000}];
+  int32 authorId = 4;
+}
+
+message UpdatePostRequest {
+  int32 id = 1;
   string title = 2;
   string body = 3;
-  int32 authorId = 4;
 }
 
 message ListPostRequest {
   int32 page = 1;
   int32 limit = 2;
+  int32 authorId = 3;
 }
 
 service PostService {
-  rpc addPost (AddPostRequest) returns (Post) {}
-  rpc listPosts (ListPostRequest) returns (Posts) {}
+  rpc AddPost (AddPostRequest) returns (Post) {}
+  rpc UpdatePost (UpdatePostRequest) returns (Post) {}
+  rpc ListPosts (ListPostRequest) returns (Posts) {}
 }

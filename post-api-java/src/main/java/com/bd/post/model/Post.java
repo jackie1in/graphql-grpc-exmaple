@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import net.badata.protobuf.converter.annotation.ProtoClass;
 import net.badata.protobuf.converter.annotation.ProtoField;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import sample.PostProto;
 
@@ -24,19 +25,20 @@ import java.time.LocalDateTime;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ProtoField(name = "id")
+	@ProtoField
     private Integer id;
-    @ProtoField
+	@ProtoField
     private String title;
-    @ProtoField
+	@ProtoField
     private String body;
-    @ProtoField
+	@ProtoField
     private Integer authorId;
 
-
-	@ProtoField(converter = LocalDateTimeConverterImpl.class,nullValue = ProtobufNullValueInspectorImpl.class)
     @CreatedDate
+	@ProtoField(nullValue = ProtobufNullValueInspectorImpl.class,converter = LocalDateTimeConverterImpl.class)
     private LocalDateTime createdAt;
+	@LastModifiedDate
+	private LocalDateTime updatedAt;
 
     public Post(String title, String body) {
         this.title = title;

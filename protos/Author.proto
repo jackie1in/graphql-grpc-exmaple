@@ -15,7 +15,7 @@ message Author{
     string name = 2;
 }
 message AddAuthorRequest{
-    string name = 1 [(validate.rules).string = {min_len: 5, max_len: 10}];
+    string name = 1 [(validate.rules).string = {min_len: 5, max_len: 10, pattern: "[A-Za-z0-9]+$"}];
 }
 
 message GetAuthorRequest{

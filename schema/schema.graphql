@@ -7,13 +7,20 @@ type Author{
   id: ID!
   # 名称
   name: String
+  # 文章列表
+  posts(request: ListPostRequest!): Posts
 }
 # 添加作者参数
 input AddAuthorRequest{
   # 名字
   name: String!
 }
-
+# 获取作者参数
+input GetAuhtortRequest{
+  # id获取
+  id: ID
+}
+# 文章
 type Post {
   # id
   id: ID
@@ -36,11 +43,20 @@ type Posts {
   # 条数
   limit: Int
   # 结点
-  nodesList: [Post]
+  nodes: [Post]
 }
 
 # 添加文章参数
 input AddPostRequest {
+  # 标题
+  title: String
+  # 内容
+  body: String
+}
+# 更新文章，支持单项更新
+input UpdatePostRequest {
+  # id
+  id: ID!
   # 标题
   title: String
   # 内容
@@ -53,12 +69,19 @@ input ListPostRequest{
     # 获取条数
     limit: Int!
 }
+# 查询
 type Query {
-  listPosts(request: ListPostRequest): Posts
+  # 获取作者信息
+  getAuthor(request: GetAuhtortRequest!): Author
+  # 查询所有文章
+  listPosts(request: ListPostRequest!): Posts
 }
-
+# 更新
 type Mutation {
-  addPost(request: AddPostRequest): Post
+  # 新增文章
+  addPost(request: AddPostRequest!): Post!
+  # 更新文章
+  updatePost(request: UpdatePostRequest!): Post
   # 新增作者
   addAuthor(request: AddAuthorRequest!): Author
 }

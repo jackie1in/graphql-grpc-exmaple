@@ -1,21 +1,30 @@
 package com.bd.gateway.configure;
 
-import com.oembedler.moon.graphql.boot.error.ThrowableGraphQLError;
-import graphql.GraphQLError;
+import graphql.servlet.core.GenericGraphQLError;
 import io.grpc.StatusRuntimeException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@Slf4j
+/**
+ * @see com.oembedler.moon.graphql.boot.error.GraphQLErrorHandlerFactory
+ */
 public class ExceptionHandlerConfiguration {
 
 	@ExceptionHandler(StatusRuntimeException.class)
-	ThrowableGraphQLError handle(StatusRuntimeException e) {
-		return new ThrowableGraphQLError(e, e.getMessage());
+	GenericGraphQLError handle(StatusRuntimeException e) {
+		switch (e.getStatus().getCode()){
+			case INVALID_ARGUMENT:
+				return new GenericGraphQLError(e.getMessage());
+			case UNAVAILABLE:
+				return new GenericGraphQLError("服务不可用，请稍后再试！");
+			default:
+				return new GenericGraphQLError(e.getMessage());
+		}
 	}
 
 	@ExceptionHandler(Throwable.class)
-	GraphQLError handle(Throwable e) {
-		return new ThrowableGraphQLError(e, e.getMessage());
+	GenericGraphQLError handle(Throwable e) {
+		return new GenericGraphQLError(e.getMessage());
 	}
 }

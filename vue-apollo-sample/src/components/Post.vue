@@ -93,8 +93,10 @@ export default {
       variables() {
         // 在这里使用 vue 响应式属性
         return {
-          page: this.page.currentPage,
-          limit: this.page.pageSize
+          request: {
+             page: this.page.currentPage,
+            limit: this.page.pageSize
+          }
         };
       },
       error(error) {
@@ -145,7 +147,7 @@ export default {
           mutation: ADD_POST,
           // 参数
           variables: {
-            input: {
+            request: {
               ...param
             }
           },

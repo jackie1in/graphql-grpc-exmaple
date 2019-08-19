@@ -46,7 +46,7 @@ dependencies {
     compile("com.google.protobuf:protobuf-java-util:${protocVersion}")
 
     // 配置protobuf的文件位置
-    protobuf files("./protos-tmp/package/")
+    protobuf files("../protos")
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
 
@@ -96,26 +96,15 @@ protobuf {
     }
 }
 
-afterEvaluate {
-    extractIncludeProto.dependsOn unTar
-}
 
-
-task downloadFile(type: Download) {
-    if (!new File("./protos-tmp").exists()){
-        new File("./protos-tmp").mkdir()
+sourceSets {
+    main {
+        resources {
+            srcDir '../schema' //资源目录
+        }
     }
-    src "http://product.beidougx.com.cn/nexus/content/repositories/npm-all/protos/-/protos-${protosVersion}.tgz"
-    dest './protos-tmp'
-    overwrite false
 }
 
-task unTar (type: Copy, dependsOn: downloadFile) {
-    //dependsOn allprojects.findResults { it.tasks.findByName('downloadFile') }
-    from tarTree(resources.gzip("./protos-tmp/protos-${protosVersion}.tgz"))
-    into './protos-tmp'
-    duplicatesStrategy 'exclude'
-}
 
 idea {
     module {

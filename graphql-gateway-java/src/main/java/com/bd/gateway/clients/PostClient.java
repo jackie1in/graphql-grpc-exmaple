@@ -22,4 +22,9 @@ public class PostClient {
         return postServiceFutureStub.listPosts(request);
     }
 
+
+	public ListenableFuture<PostProto.Post> updatePost(sample.PostProto.UpdatePostRequest request){
+		return postServiceFutureStub.updatePost(request);
+	}
+
 }

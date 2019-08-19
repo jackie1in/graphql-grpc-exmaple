@@ -1,6 +1,6 @@
 #import "./PostFragment.gql"
-query listPosts($page: Int,$limit: Int){
-  listPosts(page:$page,limit:$limit){
+query listPosts($request: ListPostRequest!){
+  listPosts(request: $request){
     count
     page
     limit

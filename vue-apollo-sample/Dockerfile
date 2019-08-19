@@ -3,8 +3,10 @@ FROM node:10.16.0-alpine AS build
 USER root
 
 WORKDIR /home/node/compile/
+RUN apk add python
+COPY schema /home/node/schema/
 
-COPY . /home/node/compile/
+COPY vue-apollo-sample /home/node/compile/
 
 RUN  yarn run install:offline
 

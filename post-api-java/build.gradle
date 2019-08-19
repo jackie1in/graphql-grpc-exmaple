@@ -9,6 +9,7 @@ buildscript {
         gradleDownloadTaskVersion = "4.0.0"
         protosVersion = "1.3.2"
         protobufConverterVersion = "1.1.5"
+        reflectasmVersion = "1.11.9"
         pgvVersion = "0.2.0"
     }
     repositories {
@@ -39,15 +40,22 @@ dependencies {
     compile "org.postgresql:postgresql"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
 
+    compile "io.envoyproxy.protoc-gen-validate:pgv-java-stub:${pgvVersion}"
+    compile "io.envoyproxy.protoc-gen-validate:pgv-java-grpc:${pgvVersion}"
+
     compile ("com.github.BAData:protobuf-converter:${protobufConverterVersion}"){
         exclude(group: "com.google.protobuf", module: "protobuf-java")
     }
 
-    compile "io.envoyproxy.protoc-gen-validate:pgv-java-stub:${pgvVersion}"
-    compile "io.envoyproxy.protoc-gen-validate:pgv-java-grpc:${pgvVersion}"
 
     // 配置protobuf的文件位置
-    protobuf files("./protos-tmp/package/")
+    protobuf files("../protos")
+
+    compile 'asm:asm:3.3.1'
+    compile 'asm:asm-commons:3.3.1'
+    compile 'asm:asm-util:3.3.1'
+    compile 'cglib:cglib-nodep:2.2.2'
+    compile "com.esotericsoftware:reflectasm:${reflectasmVersion}"
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
 
@@ -81,26 +89,6 @@ protobuf {
     }
 }
 
-afterEvaluate {
-    extractIncludeProto.dependsOn unTar
-}
-
-
-task downloadFile(type: Download) {
-    if (!new File("./protos-tmp").exists()){
-        new File("./protos-tmp").mkdir()
-    }
-    src "http://product.beidougx.com.cn/nexus/content/repositories/npm-all/protos/-/protos-${protosVersion}.tgz"
-    dest './protos-tmp'
-    overwrite false
-}
-
-task unTar (type: Copy, dependsOn: downloadFile) {
-    //dependsOn allprojects.findResults { it.tasks.findByName('downloadFile') }
-    from tarTree(resources.gzip("./protos-tmp/protos-${protosVersion}.tgz"))
-    into './protos-tmp'
-    duplicatesStrategy 'exclude'
-}
 
 idea {
     module {

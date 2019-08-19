@@ -17,7 +17,8 @@ services:
       POSTGRES_PASSWORD: "password"
   graphql-api:
     build:
-      context: "./graphql-api"
+      context: .
+      dockerfile: ./graphql-api/Dockerfile
     image: "graphql-api:latest"  
     container_name: graphql-api   
     ports:
@@ -31,7 +32,8 @@ services:
       - PORT=4000
   graphql-gateway-java:
     build:
-      context: "./graphql-gateway-java"
+      context: .
+      dockerfile: ./graphql-gateway-java/Dockerfile
     image: "graphql-gateway-java:latest"  
     container_name: graphql-gateway-java 
     expose:
@@ -48,7 +50,8 @@ services:
       - JAVA_OPTS=-Xmx128m
   post-api-java:
     build:
-      context: "./post-api-java"
+      context: .
+      dockerfile: ./post-api-java/Dockerfile
     image: "post-api-java:latest"
     container_name: post-api-java
     expose:
@@ -62,7 +65,8 @@ services:
       - JAVA_OPTS=-Xmx128m
   vue-apollo-sample:
     build:
-      context: "./vue-apollo-sample"
+      context: .
+      dockerfile: ./vue-apollo-sample/Dockerfile
       args: 
         VUE_APP_GRAPHQL_HTTP: http://localhost:4000/graphql
     image: "vue-apollo-sample:latest"
@@ -76,7 +80,8 @@ services:
     command: /bin/sh -c "exec nginx -g 'daemon off;'"
   vue-apollo-sample-graphql-gateway-java:
     build:
-      context: "./vue-apollo-sample"
+      context: .
+      dockerfile: ./vue-apollo-sample/Dockerfile
       args: 
         VUE_APP_GRAPHQL_HTTP: http://localhost:8800/graphql
     image: "vue-apollo-sample-graphql-gateway-java:latest"

@@ -4,9 +4,12 @@ USER root
 
 WORKDIR /home/node/compile/
 
-COPY . /home/node/compile/
+COPY schema /home/node/schema/
+COPY protos /home/node/protos/
 
-RUN yarn run install:offline
+COPY graphql-api /home/node/compile/
+
+RUN rm -rf node_modules && yarn run install:offline
 RUN yarn run build
 
 FROM node:10.16.0-alpine

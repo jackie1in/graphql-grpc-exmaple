@@ -19,4 +19,8 @@ public class AuthorClient {
 	public ListenableFuture<AuthorProto.Author> getAuthor(Integer id){
 		return authorServiceFutureStub.getAuthor(AuthorProto.GetAuthorRequest.newBuilder().setId(id).build());
 	}
+
+	public ListenableFuture<AuthorProto.Author> getAuthor(AuthorProto.GetAuthorRequest req){
+		return authorServiceFutureStub.getAuthor(req);
+	}
 }

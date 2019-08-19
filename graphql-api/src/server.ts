@@ -2,7 +2,12 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { schema as schemaPublic } from './graphql';
 
-const server = new ApolloServer({ schema: schemaPublic });
+const server = new ApolloServer({ schema: schemaPublic, playground: {
+  settings: {
+    'editor.theme': 'light',
+  }
+},
+});
 
 const app = express();
 server.applyMiddleware({ app });
