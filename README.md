@@ -27,14 +27,14 @@ docker-compose up -d postgres
 ```
 # 访问地址
 ## nodejs网关
-playground访问地址 http://localhost:4000/graphql
-api接口访问地址 http://localhost:4000/graphql
-vue web(1)Java版本网关访问地址 http://localhost:8000/
+- playground访问地址 http://localhost:4000/graphql
+- api接口访问地址 http://localhost:4000/graphql
+- vue web(1)Java版本网关访问地址 http://localhost:8000/
 
 ## java网关
-playground访问地址 http://localhost:8800/playground
-api接口访问地址 http://localhost:8800/graphql
-vue web(2)Java版本网关访问地址 http://localhost:8010/
+- playground访问地址 http://localhost:8800/playground
+- api接口访问地址 http://localhost:8800/graphql
+- vue web(2)Java版本网关访问地址 http://localhost:8010/
 ## 停止删除镜像
 ### 停止
 ```
