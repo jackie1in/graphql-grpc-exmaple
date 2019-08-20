@@ -178,22 +178,6 @@ query {
 ## 注意事项
 - proto文件名规范
 > 本身编译时是支持文件名相同，只要的package不同就行，但是会觉得很怪，使用gradle插件编译的时候会出bug
-## java中使用
-### 正式环境 
-直接通过npm的tgz文件下载，解压编译，可以通过npm的版本管理来做版本控制，当然本身也是有git仓库的
-- [x] 文件下载task
-- [x] 解压task
-- [x] 编译task
-### 开发环境
-- [X] 直接使用原始文件，支持发布到npm仓库
-- [X] 使用git仓库
-- [X] 切换版本task
-## nodejs中
-### 正式环境 
-- [x] install发布protos版本
-### 开发环境
-- [ ] npm link(maybe)
-
 
 ### 问题修复
 - [windows环境下无法在项目根目录下执行copy task](https://discuss.gradle.org/t/error-with-a-copy-task-on-windows/1803/4)
