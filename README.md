@@ -105,8 +105,7 @@ https://medium.com/@svengau_17540/when-graphql-meets-grpc-3e9729d32e05
 
 # proto-loader
 https://github.com/grpc/grpc-node/tree/master/packages/proto-loader
-
----
+<br>
 https://github.com/protobufjs/protobuf.js
 
 # apoll-sever
