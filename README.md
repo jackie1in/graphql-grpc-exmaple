@@ -38,15 +38,29 @@ docker-compose up -d
 docker-compose up -d postgres
 ```
 # 访问地址
-## nodejs网关
+### docker-compose启动
+#### java网关
+- playground访问地址 http://localhost:8800/playground
+- voyager访问地址 http://localhost:8800/voyager
+- api接口访问地址 http://localhost:8800/graphql
+- vue web访问地址 http://localhost:8010/
+
+#### nodejs网关
 - playground访问地址 http://localhost:4000/graphql
 - api接口访问地址 http://localhost:4000/graphql
 - vue web访问地址 http://localhost:8000/
-
-## java网关
-- playground访问地址 http://localhost:8800/playground
-- api接口访问地址 http://localhost:8800/graphql
-- vue web访问地址 http://localhost:8010/
+    
+### 本地启动
+#### java网关
+- playground访问地址 http://localhost:8888/playground
+- voyager访问地址 http://localhost:8888/voyager
+- api接口访问地址 http://localhost:8888/graphql
+- vue web访问地址 http://localhost:8081/
+#### nodejs网关 
+- playground访问地址 http://localhost:4001/graphql
+- api接口访问地址 http://localhost:4001/graphql
+- vue web访问地址 http://localhost:8081/
+  
 ## 停止删除镜像
 ### 停止
 ```
