@@ -154,10 +154,16 @@ export default {
           // 用结果更新缓存
           // 查询将先通过乐观响应、然后再通过真正的变更结果更新
           update: (store, { data: { addPost } }) => {
+            let pageParam = {
+              request: {
+                page: this.page.currentPage,
+                limit: this.page.pageSize
+              }
+            }
             // 从缓存中读取这个查询的数据
             const data = store.readQuery({
               query: LIST_POST,
-              variables: { page: this.page.currentPage, limit: this.page.pageSize }
+              variables: pageParam
             });
             console.log(data);
             data.listPosts.count = data.listPosts.count + 1 || 1;
@@ -167,9 +173,9 @@ export default {
             if (data.listPosts.nodes.length > 0) {
               data.listPosts.nodes.pop();
             }
-            data.listPosts.nodes.unshift(addPost.result);
+            data.listPosts.nodes.unshift(addPost);
             // 将数据写回缓存
-            store.writeQuery({ query: LIST_POST, variables: { page: this.page.currentPage, limit: this.page.pageSize }, data });
+            store.writeQuery({ query: LIST_POST, variables: pageParam, data });
           },
           // 乐观 UI
           // 将在请求产生时作为“假”结果，使用户界面能够快速更新
@@ -180,7 +186,7 @@ export default {
               message: "post.created",
               result: {
                 __typename: "Post",
-                _id: -1,
+                id: -1,
                 title: "",
                 body: "",
                 createdAt: null
