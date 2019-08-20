@@ -28,7 +28,7 @@ message Posts {
 
 message AddPostRequest {
   string title = 2 [(validate.rules).string = {min_len: 1, max_len: 100}];
-  string body = 3 [(validate.rules).string = {min_len: 100, max_len: 20000}];
+  string body = 3 [(validate.rules).string = {min_len: 1, max_len: 20000}];
   int32 authorId = 4;
 }
 
