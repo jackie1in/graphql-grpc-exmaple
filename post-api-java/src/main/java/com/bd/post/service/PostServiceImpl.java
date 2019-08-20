@@ -90,7 +90,7 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
 				io.envoyproxy.pgv.StringValidation.maxLength(".sample.UpdatePostRequest.title", request.getTitle(), 100);
 			}
 			if (!request.getBody().equals( "")){
-				io.envoyproxy.pgv.StringValidation.minLength(".sample.UpdatePostRequest.body", request.getBody(), 100);
+				io.envoyproxy.pgv.StringValidation.minLength(".sample.UpdatePostRequest.body", request.getBody(), 1);
 				io.envoyproxy.pgv.StringValidation.maxLength(".sample.UpdatePostRequest.body", request.getBody(), 20000);
 			}
 		}catch (ValidationException e){
