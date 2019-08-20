@@ -1,3 +1,15 @@
+# 目录说明
+```
+├── README.md readme
+├── asset readme资源文件
+├── docker-compose.yaml docker-compose配置文件
+├── graphql-api nodjs graphql网关
+├── graphql-gateway-java java graphql网关
+├── post-api-java post后端服务
+├── protos protos文件
+├── schema graphql文件
+└── vue-apollo-sample 前端vue程序
+```
 # 运行环境
 基础环境 | 版本
 --- | ---
