@@ -14,7 +14,7 @@
 基础环境 | 版本
 --- | ---
 node | 10.16.0
-python(node-gpy依赖python,用于编译node项目) | 3.7
+python(node-gyp依赖python,用于编译node项目) | 3.7
 jdk(开发，生产使用jre) | 1.8.0_211
 gradle | 4.8.1
 
@@ -73,7 +73,7 @@ docker-compose down --rmi all
 
 ## 说明
 ### docker版本
-docker最低版本为17.06.0才支持stage构建
+docker最低版本为[17.05.0-ce](https://docs.docker.com/engine/release-notes/#17050-ce)才支持stage构建
 ### lombok idea配置
 ![lombok idea配置](./asset/lombokconfig.jpg)
 ### pb依赖文件生成
